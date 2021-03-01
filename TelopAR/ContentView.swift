@@ -10,27 +10,63 @@ import RealityKit
 
 struct ContentView : View {
     var body: some View {
-        return ARViewContainer().edgesIgnoringSafeArea(.all)
+        
+        let container = ARViewContainer()
+        
+        return ZStack() {
+            container.edgesIgnoringSafeArea(.all)
+            
+            VStack() {
+                Spacer()
+                
+                HStack() {
+                    Spacer()
+                    
+                    Button(action: {
+                        container.addTelop()
+                    }, label: {
+                        Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .foregroundColor(.orange)
+                            .padding(20)
+                    })
+                }
+            }
+        }
     }
 }
 
 struct ARViewContainer: UIViewRepresentable {
     
+    let arView = ARView(frame: .zero)
+    let telop = try! Experience.loadTelop()
+    
     func makeUIView(context: Context) -> ARView {
         
-        let arView = ARView(frame: .zero)
+        arView.environment.sceneUnderstanding.options = .occlusion
+        arView.debugOptions = .showSceneUnderstanding
         
-        // Load the "Box" scene from the "Experience" Reality File
-        let boxAnchor = try! Experience.loadBox()
-        
-        // Add the box anchor to the scene
-        arView.scene.anchors.append(boxAnchor)
+        arView.scene.anchors.append(telop)
         
         return arView
         
     }
     
     func updateUIView(_ uiView: ARView, context: Context) {}
+    
+    func addTelop() {
+        guard let wt = arView.raycast(from: arView.center,
+                                      allowing: .estimatedPlane,
+                                      alignment: .any).first?.worldTransform else {
+            return
+        }
+        
+        let copy = try! Experience.loadTelop()
+        copy.transform = Transform(matrix: wt)
+        
+        arView.scene.anchors.append(copy)
+    }
     
 }
 
