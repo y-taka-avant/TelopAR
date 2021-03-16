@@ -40,17 +40,13 @@ struct ContentView : View {
 struct ARViewContainer: UIViewRepresentable {
     
     let arView = ARView(frame: .zero)
-    let telop = try! Experience.loadTelop()
     
     func makeUIView(context: Context) -> ARView {
         
         arView.environment.sceneUnderstanding.options = .occlusion
         arView.debugOptions = .showSceneUnderstanding
         
-        arView.scene.anchors.append(telop)
-        
         return arView
-        
     }
     
     func updateUIView(_ uiView: ARView, context: Context) {}
@@ -62,10 +58,10 @@ struct ARViewContainer: UIViewRepresentable {
             return
         }
         
-        let copy = try! Experience.loadTelop()
-        copy.transform = Transform(matrix: wt)
-        
-        arView.scene.anchors.append(copy)
+        let telop = try! Experience.loadTelop()
+        telop.children[0].anchor?.anchoring = AnchoringComponent(.plane(.any, classification: .any, minimumBounds: [0, 0]))
+        telop.setTransformMatrix(wt, relativeTo: nil)
+        arView.scene.anchors.append(telop)
     }
     
 }
