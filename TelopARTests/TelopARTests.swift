@@ -2,7 +2,7 @@
 //  TelopARTests.swift
 //  TelopARTests
 //
-//  Created by yuya.takahashi on 2021/03/01.
+//  Created by y-taka on 2021/03/01.
 //
 
 import XCTest
