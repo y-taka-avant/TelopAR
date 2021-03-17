@@ -1,5 +1,5 @@
 # TelopAR
-Display words like a telop by AR.
+![out](https://user-images.githubusercontent.com/78395651/111399528-e5cf7a80-8708-11eb-8d31-2af1f4c9fd89.gif)
 
 ## Overview
 AR空間でスクロール型のテロップを表示するサンプルです。
