@@ -4,7 +4,7 @@
 ## Overview
 AR空間でスクロール型のテロップを表示するサンプルです。
 
-This is an AR sample application that a 3D model moves around the AR world using a LiDAR module. 
+This is an AR sample application that telops are scrolling around the AR world. 
 
 ## Requirement
 Swift5.3.2
@@ -16,7 +16,7 @@ iOS14.4
 ## How to Start
 プロジェクトをクローンし、iOSデバイスにビルド＆インストールしてください。
 
-Clone this project, and build and install it in iOS devices which have a LiDAR module.
+Clone this project, and build and install it in iOS devices.
 
 ## Author
 [twitter](https://twitter.com/LabAvant)
